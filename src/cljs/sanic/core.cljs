@@ -54,12 +54,20 @@
   (.down js/kd.SPACE move-jump)
   )
 
+(defn start-music []
+  (let [sound (.createElement js/document "Audio")
+        body (.-body js/document)]
+    (set! (.-src sound) "mp3/sanic.mp3")
+    (.appendChild body sound)
+    (.play sound)))
+
 (defn on-tiles-loaded [assets]
   (set! (.-y (.-position sanic)) 150)
   (set! (.-x (.-position sanic)) 10)
   (set! (.-interactive sanic) true)
   (dorun (map #(.addChild game-container %) [bg-far bg-mid sanic]))
   (init-keys)
+  (start-music)
   (animate))
 
 (defn setup []
