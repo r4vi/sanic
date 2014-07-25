@@ -11,7 +11,7 @@
 (def game-container (PIXI/DisplayObjectContainer.))
 
 (def loader (PIXI/AssetLoader. (clj->js
-                                ["img/sanic.png"
+                                ["img/sanic-s.png"
                                  "img/bg-far.png"
                                  "img/bg-mid.png"])))
 
@@ -20,7 +20,7 @@
 (defn apply-gravity [sprite]
   (let [sprite-y (.-position.y sprite)]
     (when (< (.-position.y sprite) 150)
-      (set! (.-position.y sprite) (+ sprite-y 0.3)))))
+      (set! (.-position.y sprite) (+ sprite-y 0.7)))))
 
 ;;(.-position.y sanic)
 
@@ -32,7 +32,8 @@
              512 256))
 (def sanic (.fromImage PIXI/Sprite "img/sanic-s.png"))
 
-(defn animate []
+
+ defn animate []
   (.tick js/kd)
   (.render renderer stage)
   (apply-gravity sanic)
@@ -43,7 +44,8 @@
   (set! (.-position.x sanic) (- (.-position.x sanic) 1)))
 
 (defn move-right []
-  (set! (.-position.x sanic) (+ (.-position.x sanic) 1)))
+  (set! (.-position.x sanic) (+ (.-position.x sanic) 1))
+  (set! (.-rotation sanic) (+ (.-rotation sanic) 0.2)))
 
 (defn move-jump []
   (set! (.-position.y sanic) (- (.-position.y sanic) 10)))
